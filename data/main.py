@@ -15,15 +15,20 @@ def requirement_splitter(requirement: str) -> dict[str, str]:
         result["antireqs"] = antireqs_match.group(1).strip()
     return result
 
+def format_requirements(requirements: str) -> str:
+    requirements = requirements.replace("0.50", "1").replace("1.00", "2").replace("1.50", "3").replace("2.00", "4").replace("2.50", "5")
+    requirements = requirements.replace("0.5", "1").replace("1.0", "2").replace("1.5", "3").replace("2.0", "4").replace("2.5", "5")
+    return requirements
+
 class Course:
     def __init__(self, code, title, description, requirements):
         self.code = code
         self.title = title
         self.description = description
-        self.requirements = requirements
-        self.prereqs = requirement_splitter(requirements)["prereqs"]
-        self.coreqs = requirement_splitter(requirements)["coreqs"]
-        self.antireqs = requirement_splitter(requirements)["antireqs"]
+        self.requirements = format_requirements(requirements)
+        self.prereqs = requirement_splitter(self.requirements)["prereqs"]
+        self.coreqs = requirement_splitter(self.requirements)["coreqs"]
+        self.antireqs = requirement_splitter(self.requirements)["antireqs"]
     def pretty_print(self, extended=False):
         if extended:
             print(f"Course: {self.code} - {self.title}")
