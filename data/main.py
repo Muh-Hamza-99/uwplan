@@ -45,6 +45,9 @@ class Course:
 
         # ABC/DEF 123 -> ABC 123/DEF 123 | ABC or DEF 123 -> ABC 123 or DEF 123
         prereqs = re.sub(r"([A-Z]{2,})\s?(/|or)\s?([A-Z]{2,})\s?([0-9]{3}[A-Z]?)", r"\1 \4 \2 \3 \4", prereqs)
+        
+        # ABC 123/456 -> ABC 123/ABC 456 | ABC 123 or 456 -> ABC 123 or ABC 456
+        prereqs = re.sub(r"([A-Z]{2,})\s?([0-9]{3}[A-Z]?)\s?(/|or)\s?([0-9]{3}[A-Z]?)", r"\1 \2 \3 \1 \4", prereqs)
 
         print(f"Course: {self.code}")
         print(f"Prerequisites: {self.prereqs}")
