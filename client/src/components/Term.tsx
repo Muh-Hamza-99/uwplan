@@ -1,6 +1,10 @@
-type Props = {};
+import CourseModal from "./CourseModal";
 
-const Term = ({}: Props) => {
+type Props = {
+    termId: number;
+};
+
+const Term = ({ termId }: Props) => {
   return (
     <div className="card shadow-xl">
         <div className="card-body">
@@ -34,7 +38,7 @@ const Term = ({}: Props) => {
             </div>
             <div className="card-actions justify-end">
                 <button className="btn btn-error">Remove</button>
-                <button className="btn btn-secondary">Add Course</button>
+                <CourseModal modalId={termId} />
             </div>
         </div>
     </div>
