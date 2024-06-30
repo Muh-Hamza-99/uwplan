@@ -10,7 +10,7 @@ response = requests.get(URL, headers={ "x-api-key": os.getenv("UW_API_KEY") })
 courses = response.json()
 
 def valid_course(course) -> bool:
-    return course["associatedAcademicCareer"] == "UG"
+    return course["associatedAcademicCareer"] == "UG" and course["courseComponentCode"] != "SEM"
 
 with open("courses.csv", "w", newline="") as file:
     headers = ["code", "title", "description", "requirements"]
