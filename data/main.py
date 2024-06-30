@@ -26,4 +26,12 @@ class Course:
         self.antireqs = requirement_splitter(requirements)["antireqs"]
 
 def main():
-    pass
+    data = pd.read_csv("courses.csv", encoding="unicode_escape")
+    data["requirements"] = data["requirements"].fillna("")
+    courses = []
+    for i, row in data.iterrows():
+        code, title, description, requirements = row["code"], row["title"], row["description"], row["requirements"]
+        course = Course(code, title, description, requirements)
+        courses.append(course)
+
+main()
