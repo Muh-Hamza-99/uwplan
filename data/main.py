@@ -44,10 +44,10 @@ class Course:
         prereqs = self.prereqs
 
         # ABC/DEF 123 -> ABC 123/DEF 123 | ABC or DEF 123 -> ABC 123 or DEF 123
-        prereqs = re.sub(r"([A-Z]{2,})\s?(/|or)\s?([A-Z]{2,})\s?([0-9]{3}[A-Z]?)", r"(\1 \4 \2 \3 \4)", prereqs)
+        prereqs = re.sub(r"([A-Z]{2,})\s?(/|or)\s?([A-Z]{2,})\s?([0-9]{3}[A-Z]?)", r"\1 \4/\3 \4", prereqs)
         
         # ABC 123/456 -> ABC 123/ABC 456 | ABC 123 or 456 -> ABC 123 or ABC 456
-        prereqs = re.sub(r"([A-Z]{2,})\s?([0-9]{3}[A-Z]?)\s?(/|or)\s?([0-9]{3}[A-Z]?)", r"(\1 \2 \3 \1 \4)", prereqs)
+        prereqs = re.sub(r"([A-Z]{2,})\s?([0-9]{3}[A-Z]?)\s?(/|or)\s?([0-9]{3}[A-Z]?)", r"\1 \2/\1 \4", prereqs)
 
         # ABC 111, 222, 333, ... -> ABC 111, ABC 222, ABC 333, ...
         many_catalog_numbers = re.findall(r"[A-Z]{2,}\s?(?:[0-9]{3}[A-Z]?,\s?)+[0-9]{3}[A-Z]?", prereqs)
@@ -58,7 +58,7 @@ class Course:
             prereqs = prereqs.replace(match, expanded_string)
 
         # One of AAA 111, BBB 222, CCC 333, ... -> (AAA 111 or BBB 222 or CCC 333 or ...)
-        one_ofs = re.findall(r"[Oo]ne of (?:[A-Z]{2,}\s?[0-9]{3}[A-Z]?,?\s?)+", prereqs)
+        one_ofs = re.findall(r"[Oo]ne of (?:[A-Z]{2,}\s?[0-9]{3}[A-Z]?(?:,|/)?\s?)+", prereqs)
         for match in one_ofs:
             codes = re.findall(r"[A-Z]{2,}\s?[0-9]{3}[A-Z]?", match)
             or_string = " or ".join(codes)
