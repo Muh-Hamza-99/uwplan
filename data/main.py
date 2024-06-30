@@ -40,6 +40,15 @@ class Course:
         print(f"Corequisites: {self.coreqs}")
         print(f"Antirequisites: {self.antireqs}")
         print("\n")
+    def parse_prereqs(self):
+        prereqs = self.prereqs
+
+        # ABC/DEF 123 -> ABC 123/DEF 123 | ABC or DEF 123 -> ABC 123 or DEF 123
+        prereqs = re.sub(r"([A-Z]{2,})\s?(/|or)\s?([A-Z]{2,})\s?([0-9]{3}[A-Z]?)", r"\1 \4 \2 \3 \4", prereqs)
+
+        print(f"Course: {self.code}")
+        print(f"Prerequisites: {self.prereqs}")
+        print(f"Parsed prerequisites: {prereqs}\n")
         
 def main():
     data = pd.read_csv("courses.csv", encoding="unicode_escape")
@@ -48,7 +57,7 @@ def main():
     for i, row in data.iterrows():
         code, title, description, requirements = row["code"], row["title"], row["description"], row["requirements"]
         course = Course(code, title, description, requirements)
-        course.pretty_print()
+        course.parse_prereqs()
         courses.append(course)
 
 main()
