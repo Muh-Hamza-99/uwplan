@@ -24,7 +24,18 @@ class Course:
         self.prereqs = requirement_splitter(requirements)["prereqs"]
         self.coreqs = requirement_splitter(requirements)["coreqs"]
         self.antireqs = requirement_splitter(requirements)["antireqs"]
-
+    def pretty_print(self, extended=False):
+        if extended:
+            print(f"Course: {self.code} - {self.title}")
+            print(f"Description: {self.description}")
+        else:
+            print(f"Course: {self.code}")
+        print(f"Requirements: {self.requirements}")
+        print(f"Prerequisites: {self.prereqs}")
+        print(f"Corequisites: {self.coreqs}")
+        print(f"Antirequisites: {self.antireqs}")
+        print("\n")
+        
 def main():
     data = pd.read_csv("courses.csv", encoding="unicode_escape")
     data["requirements"] = data["requirements"].fillna("")
@@ -32,6 +43,7 @@ def main():
     for i, row in data.iterrows():
         code, title, description, requirements = row["code"], row["title"], row["description"], row["requirements"]
         course = Course(code, title, description, requirements)
+        course.pretty_print()
         courses.append(course)
 
 main()
