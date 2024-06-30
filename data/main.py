@@ -1,9 +1,8 @@
 import re
 import pandas as pd
-from typing import Dict
 
-# Return type is Dict("prereqs": str, "coreqs": str, "antireqs": str)
-def requirement_splitter() -> Dict[str, str]:
+# Return type is dict("prereqs": str, "coreqs": str, "antireqs": str)
+def requirement_splitter() -> dict[str, str]:
     pass
 
 class Course:
