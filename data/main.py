@@ -49,6 +49,14 @@ class Course:
         # ABC 123/456 -> ABC 123/ABC 456 | ABC 123 or 456 -> ABC 123 or ABC 456
         prereqs = re.sub(r"([A-Z]{2,})\s?([0-9]{3}[A-Z]?)\s?(/|or)\s?([0-9]{3}[A-Z]?)", r"\1 \2 \3 \1 \4", prereqs)
 
+        # ABC 111, 222, 333, ... -> ABC 111, ABC 222, ABC 333, ...
+        many_catalog_numbers = re.findall(r"[A-Z]{2,}\s?(?:[0-9]{3}[A-Z]?,\s?)+[0-9]{3}[A-Z]?", prereqs)
+        for match in many_catalog_numbers:
+            subject_code = re.findall(r"[A-Z]{2,}", match)[0]
+            catalog_numbers = re.findall(r"[0-9]{3}[A-Z]?", match)
+            expanded_string = ", ".join([f"{subject_code} {catalog_number}" for catalog_number in catalog_numbers])
+            prereqs = prereqs.replace(match, expanded_string)
+
         print(f"Course: {self.code}")
         print(f"Prerequisites: {self.prereqs}")
         print(f"Parsed prerequisites: {prereqs}\n")
