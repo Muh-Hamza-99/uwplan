@@ -3,3 +3,4 @@
 courses.csv
 *.env
 test.py
+stats.py
