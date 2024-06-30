@@ -37,7 +37,7 @@ const Term = ({ termId }: Props) => {
                 </table>
             </div>
             <div className="card-actions justify-end">
-                <button className="btn btn-error">Remove</button>
+                <button className="btn btn-error text-white">Remove</button>
                 <CourseModal modalId={termId} />
             </div>
         </div>
