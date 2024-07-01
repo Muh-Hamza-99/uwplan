@@ -1,3 +1,5 @@
+import { Plus } from "lucide-react";
+
 type Props = {
     modalId: number;
 };
@@ -5,7 +7,9 @@ type Props = {
 const CourseModal = ({ modalId }: Props) => {
   return (
     <>
-        <button className="btn btn-secondary" onClick={() => (document.getElementById(`course-modal-${modalId}`) as HTMLDialogElement).showModal()}>Add Course</button>
+        <button className="btn btn-ghost btn-circle" onClick={() => (document.getElementById(`course-modal-${modalId}`) as HTMLDialogElement).showModal()}>
+            <Plus />
+        </button>
         <dialog id={`course-modal-${modalId}`} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
                 <h3 className="font-bold text-lg">Add Course</h3>

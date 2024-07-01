@@ -1,3 +1,4 @@
+import { Trash } from "lucide-react";
 import CourseModal from "./CourseModal";
 
 type Props = {
@@ -37,7 +38,9 @@ const Term = ({ termId }: Props) => {
                 </table>
             </div>
             <div className="card-actions justify-end">
-                <button className="btn btn-error text-white">Remove</button>
+                <button className="btn btn-ghost btn-circle">
+                    <Trash />
+                </button>
                 <CourseModal modalId={termId} />
             </div>
         </div>
