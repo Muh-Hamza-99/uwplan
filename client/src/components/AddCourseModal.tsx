@@ -7,9 +7,11 @@ type Props = {
 const AddCourseModal = ({ modalId }: Props) => {
   return (
     <>
-        <button className="btn btn-ghost btn-circle" onClick={() => (document.getElementById(`add-course-modal-${modalId}`) as HTMLDialogElement).showModal()}>
-            <Plus />
-        </button>
+        <div className="tooltip" data-tip="Add course">
+            <button className="btn btn-ghost btn-circle" onClick={() => (document.getElementById(`add-course-modal-${modalId}`) as HTMLDialogElement).showModal()}>
+                <Plus />
+            </button>
+        </div>
         <dialog id={`add-course-modal-${modalId}`} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
                 <h3 className="font-bold text-lg">Add Course</h3>

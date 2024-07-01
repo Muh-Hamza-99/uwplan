@@ -7,9 +7,11 @@ type Props = {
 const DeleteTermModal = ({ modalId }: Props) => {
   return (
     <>
-        <button className="btn btn-ghost btn-circle" onClick={() => (document.getElementById(`delete-term-modal-${modalId}`) as HTMLDialogElement).showModal()}>
-            <Trash />
-        </button>
+        <div className="tooltip" data-tip="Delete term">
+            <button className="btn btn-ghost btn-circle" onClick={() => (document.getElementById(`delete-term-modal-${modalId}`) as HTMLDialogElement).showModal()}>
+                <Trash />
+            </button>
+        </div>
         <dialog id={`delete-term-modal-${modalId}`} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
                 <h3 className="font-bold text-lg">Delete Term</h3>
