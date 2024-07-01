@@ -1,5 +1,4 @@
-import { Trash } from "lucide-react";
-import CourseModal from "./CourseModal";
+import AddCourseModal from "./AddCourseModal";
 import DeleteTermModal from "./DeleteTermModal";
 
 type Props = {
@@ -40,7 +39,7 @@ const Term = ({ termId }: Props) => {
             </div>
             <div className="card-actions justify-end">
                 <DeleteTermModal modalId={termId} />
-                <CourseModal modalId={termId} />
+                <AddCourseModal modalId={termId} />
             </div>
         </div>
     </div>

@@ -4,13 +4,13 @@ type Props = {
     modalId: number;
 };
 
-const CourseModal = ({ modalId }: Props) => {
+const AddCourseModal = ({ modalId }: Props) => {
   return (
     <>
-        <button className="btn btn-ghost btn-circle" onClick={() => (document.getElementById(`course-modal-${modalId}`) as HTMLDialogElement).showModal()}>
+        <button className="btn btn-ghost btn-circle" onClick={() => (document.getElementById(`add-course-modal-${modalId}`) as HTMLDialogElement).showModal()}>
             <Plus />
         </button>
-        <dialog id={`course-modal-${modalId}`} className="modal modal-bottom sm:modal-middle">
+        <dialog id={`add-course-modal-${modalId}`} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
                 <h3 className="font-bold text-lg">Add Course</h3>
                 <p className="py-4">Add a course</p>
@@ -25,4 +25,4 @@ const CourseModal = ({ modalId }: Props) => {
   );
 };
 
-export default CourseModal;
+export default AddCourseModal;
