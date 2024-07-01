@@ -1,6 +1,25 @@
 import AddCourseModal from "./AddCourseModal";
 import DeleteTermModal from "./DeleteTermModal";
 
+const courses: {code: string; grade: number}[] = [
+    {
+        code: "MATH 137",
+        grade: 87,
+    },
+    {
+        code: "MATH 136",
+        grade: 90,
+    },
+    {
+        code: "ECON 101",
+        grade: 92,
+    },
+    {
+        code: "CS 136",
+        grade: 82,
+    }
+]
+
 type Props = {
     termId: number;
 };
@@ -16,24 +35,22 @@ const Term = ({ termId }: Props) => {
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead>
-                    <tr>
-                        <th>Course</th>
-                        <th>Grade</th>
-                    </tr>
+                        <tr>
+                            <th>Course</th>
+                            <th>Grade</th>
+                            <th>Status</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>MATH 136</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>MATH 138</td>
-                            <td>81</td>
-                        </tr>
-                        <tr>
-                            <td>CS 136</td>
-                            <td>82</td>
-                        </tr>
+                        {courses.map((course, index) => (
+                            <tr key={index}>
+                                <td>{course.code}</td>
+                                <td>{course.grade}</td>
+                                <td>
+                                    <button className="btn btn-xs btn-success">Complete</button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
