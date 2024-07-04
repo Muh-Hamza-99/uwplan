@@ -63,6 +63,13 @@ class Course:
             codes = re.findall(r"[A-Z]{2,}\s?[0-9]{3}[A-Z]?", match)
             or_string = " or ".join(codes)
             prereqs = prereqs.replace(match, f"({or_string})")
+
+        # ABC 123 with at least XX% -> ABC 123 {XX%}
+        prereqs = re.sub(r"([A-Z]{2,}\s?[0-9]{3}[A-Z]?) with a grade of at least ([0-9]{2,}%)", r"\1 {\2}", prereqs)
+
+        # At least XX% in ABC 123 -> ABC 123 {XX%}
+        # Todo: At least XX% in ABC 123 or DEF 456 -> ABC 123 {XX%} or DEF 456 {XX%}
+        prereqs = re.sub(r"[Aa]t least ([0-9]{2,}%) in ([A-Z]{2,}\s?[0-9]{3}[A-Z]?)", r"\2 {\1}", prereqs)   
         
         print(f"Course: {self.code}")
         print(f"Prerequisites: {self.prereqs}")
